@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Care - Quiz</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .quiz-section {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #fff8f0;
+    }
+    .quiz-box {
+      display: inline-block;
+      text-align: left;
+      padding: 30px;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    .quiz-box p {
+      font-weight: 500;
+      margin: 15px 0 5px;
+    }
+    button {
+      background-color: #f59e0b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #d97706;
+    }
+    #quizResult {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-row">
+      <a class="brand" href="index.html"><img src="images/logo.png" alt=""> <strong>Pet Care</strong></a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="quiz.html" class="active">Quiz</a></li>
+          <li><a href="community.html">Community</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="quiz-section">
+    <h2>🐾 Pet Care Quiz</h2>
+    <p>Test your knowledge about pets!</p>
+
+    <div class="quiz-box">
+      <p>1. How often should you walk your dog?</p>
+      <input type="radio" name="q1" value="a"> Once a month<br>
+      <input type="radio" name="q1" value="b"> Every day<br>
+      <input type="radio" name="q1" value="c"> Only on weekends<br>
+
+      <p>2. What food should cats avoid?</p>
+      <input type="radio" name="q2" value="a"> Fish<br>
+      <input type="radio" name="q2" value="b"> Chocolate<br>
+      <input type="radio" name="q2" value="c"> Chicken<br>
+
+      <p>3. How often should pets visit the vet?</p>
+      <input type="radio" name="q3" value="a"> Once a year<br>
+      <input type="radio" name="q3" value="b"> Every 5 years<br>
+      <input type="radio" name="q3" value="c"> Never<br>
+
+      <p>4. Which of these helps reduce pet stress?</p>
+      <input type="radio" name="q4" value="a"> Regular playtime<br>
+      <input type="radio" name="q4" value="b"> Ignoring them<br>
+      <input type="radio" name="q4" value="c"> Loud noises<br>
+
+      <p>5. What’s the best way to train a dog?</p>
+      <input type="radio" name="q5" value="a"> Punishment<br>
+      <input type="radio" name="q5" value="b"> Positive rewards<br>
+      <input type="radio" name="q5" value="c"> Shouting<br>
+
+      <p>6. What should you do if your pet eats something toxic?</p>
+      <input type="radio" name="q6" value="a"> Wait and see<br>
+      <input type="radio" name="q6" value="b"> Immediately contact a vet<br>
+      <input type="radio" name="q6" value="c"> Give more food<br>
+
+      <button onclick="checkQuiz()">Submit</button>
+      <p id="quizResult"></p>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> Pet Care</footer>
+
+  <script>
+    
+    window.addEventListener('error', function (e) {
+      if (e.target.tagName === 'BODY') {
+        console.log('Retrying quiz page load...');
+        setTimeout(() => location.reload(true), 500);
+      }
+    }, true);
+
+    
+    function checkQuiz() {
+      let score = 0;
+      const answers = { q1: "b", q2: "b", q3: "a", q4: "a", q5: "b", q6: "b" };
+
+      for (let q in answers) {
+        const selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) score++;
+      }
+
+      const result = document.getElementById("quizResult");
+      result.textContent = `You got ${score} out of 6 correct! 🐕`;
+      result.style.color = score >= 4 ? "green" : "red";
+    }
+
+    
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
